@@ -15,7 +15,6 @@
 		E4AA5476206A30780006E96E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA5475206A30780006E96E /* main.m */; };
 		E4AA5480206A30790006E96E /* ____Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA547F206A30790006E96E /* ____Tests.m */; };
 		E4AA548B206A30790006E96E /* ____UITests.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA548A206A30790006E96E /* ____UITests.m */; };
-		E4AA54A0206A4E8F0006E96E /* ClipPhotoDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E4AA549F206A4E8F0006E96E /* ClipPhotoDelegate.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,8 +51,6 @@
 		E4AA5486206A30790006E96E /* 相册照片UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "相册照片UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4AA548A206A30790006E96E /* ____UITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "____UITests.m"; sourceTree = "<group>"; };
 		E4AA548C206A30790006E96E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E4AA549E206A4E8F0006E96E /* ClipPhotoDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClipPhotoDelegate.h; sourceTree = "<group>"; };
-		E4AA549F206A4E8F0006E96E /* ClipPhotoDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClipPhotoDelegate.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +110,6 @@
 				E4AA5474206A30780006E96E /* Info.plist */,
 				E4AA5471206A30780006E96E /* LaunchScreen.storyboard */,
 				E4AA5475206A30780006E96E /* main.m */,
-				E4AA549E206A4E8F0006E96E /* ClipPhotoDelegate.h */,
-				E4AA549F206A4E8F0006E96E /* ClipPhotoDelegate.m */,
 			);
 			path = "相册照片";
 			sourceTree = "<group>";
@@ -273,7 +268,6 @@
 				E4AA546B206A30780006E96E /* ViewController.m in Sources */,
 				E4AA5476206A30780006E96E /* main.m in Sources */,
 				E4AA5468206A30780006E96E /* AppDelegate.m in Sources */,
-				E4AA54A0206A4E8F0006E96E /* ClipPhotoDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

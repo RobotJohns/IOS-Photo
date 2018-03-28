@@ -7,6 +7,12 @@
 //
 
 #import "ViewController.h"
+//相机
+#import <AVFoundation/AVCaptureDevice.h>
+#import <AVFoundation/AVMediaFormat.h>
+//相册
+#import <AssetsLibrary/AssetsLibrary.h>
+
 
 @interface ViewController ()
 
@@ -34,6 +40,8 @@
 
 -(void) OnButtonCameraDown:(UIButton *)sender
 {
+    if( [self RestoultAuthorizationCamera] == false )
+        return;
     NSLog(@"OnButtonCameraDown");
     UIImagePickerController  *imagePickerController = [[UIImagePickerController alloc]init];
     imagePickerController.delegate = self;
@@ -49,6 +57,8 @@
 }
 -(void) OnButtonPhotoDown:(UIButton *)sender
 {
+    if( [self RestoultAuthorizationPhotos] == false )
+        return;
     NSLog(@"OnButtonPhotoDown");
     UIImagePickerController  *imagePickerController = [[UIImagePickerController alloc]init];
     imagePickerController.delegate      = self;
@@ -174,6 +184,74 @@
     [imageData writeToFile:fullPath atomically:NO];
     //NSLog(@"写入完成 %@path",fullPath);
 }
+
+ //检查相机权限
+-(Boolean) RestoultAuthorizationCamera
+{
+    //相机权限
+    AVAuthorizationStatus authStatus = [AVCaptureDevice authorizationStatusForMediaType:AVMediaTypeVideo];
+    if (authStatus ==AVAuthorizationStatusRestricted ||//此应用程序没有被授权访问的照片数据。
+        authStatus ==AVAuthorizationStatusDenied)  //用户已经明确否认了这一照片数据的应用程序访问
+    {
+        // 无权限 引导去开启
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication]canOpenURL:url]) {
+            [[UIApplication sharedApplication]openURL:url];
+        }
+        return  false;
+    }else{
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            //[self loadImage:UIImagePickerControllerSourceTypeCamera];
+            return  true;
+        }
+        else
+        {
+            NSLog(@"手机不支持相机");
+            [self showAlertController:@"提示" message:@"手机不支持相机"];
+            return  false;
+        }
+    }
+
+}
+
+//检查相册权限
+-(Boolean) RestoultAuthorizationPhotos
+{
+    //相册权限
+    ALAuthorizationStatus author = [ALAssetsLibrary authorizationStatus];
+    if (author ==ALAuthorizationStatusRestricted || author ==ALAuthorizationStatusDenied){
+        //无权限 引导去开启
+        NSURL *url = [NSURL URLWithString:UIApplicationOpenSettingsURLString];
+        if ([[UIApplication sharedApplication] canOpenURL:url]) {
+            [[UIApplication sharedApplication] openURL:url];
+        }
+        return  false;
+    }else{
+        if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypePhotoLibrary]) {
+            return  true;
+        }
+        else
+        {
+            [self showAlertController:@"提示" message:@"手机不支持相册"];
+            return  false;
+            NSLog(@"手机不支持相册");
+        }
+    }
+}
+
+
+
+
+- (void)showAlertController:(NSString *)title message:(NSString *)message
+{
+    UIAlertController *ac = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    [ac addAction:[UIAlertAction actionWithTitle:@"我知道了" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+    }]];
+    [self presentViewController:ac animated:YES completion:nil];
+}
+
+
 
 
 - (void)didReceiveMemoryWarning {
